@@ -1,4 +1,5 @@
-// Compile with: nvcc hello_cuda.cu -gencode arch=compute_86,code=sm_86 -o hello_cuda
+// Build with CMake (see docs/IDE_SETUP.md), or by hand:
+//   nvcc hello_cuda.cu -gencode arch=compute_86,code=sm_86 -o hello_cuda
 
 #include <stdio.h>
 #include <cuda_runtime.h>

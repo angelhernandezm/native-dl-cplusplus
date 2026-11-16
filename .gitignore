@@ -1,2 +1,20 @@
-/src/.idea/*
-/src/hello_cuda.exe
+# CMake build trees (presets write to build/<preset>)
+/build/
+/install/
+/out/
+cmake-build-*/
+CMakeUserPresets.json
+
+# IDE state
+.idea/
+.vs/
+*.user
+*.suo
+
+# Build outputs from compiling by hand with nvcc
+*.exe
+*.exp
+*.lib
+*.pdb
+*.obj
+*.o
