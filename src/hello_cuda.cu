@@ -1,14 +1,22 @@
-// Compile with: nvcc -std=c++14 -x cu -arch=sm_75 hello_cuda.cu -o hello_cuda
+// Compile with: nvcc hello_cuda.cu -gencode arch=compute_86,code=sm_86 -o hello_cuda
 
 #include <stdio.h>
+#include <cuda_runtime.h>
 
 __global__ void welcome() {
-   printf("Welcome to DL with C++ — block %d, thread %d\n", blockIdx.x, threadIdx.x);
+   printf("Welcome to DL with C++ - block %d, thread %d\n", blockIdx.x, threadIdx.x);
 }
 
 int main() {
-  welcome<<<3,3>>>(); // 3 blocks, 3 threads each
-  cudaDeviceSynchronize();
+    welcome<<<3,3>>>();
 
-  return 0;
+    auto err = cudaGetLastError();
+    if (err != cudaSuccess)
+        printf("Kernel launch error: %s\n", cudaGetErrorString(err));
+
+    err = cudaDeviceSynchronize();
+    if (err != cudaSuccess)
+        printf("Kernel execution error: %s\n", cudaGetErrorString(err));
+
+    return 0;
 }
